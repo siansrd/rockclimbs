@@ -12,6 +12,14 @@ CragQuery.prototype = {
         onQueryFinished(docs)
       });
     })
+  },
+  byId: function(name, onQueryFinished) {
+    MongoClient.connect(this.url, function(err, db) {
+      var collection = db.collection('crags');
+      collection.find({name: { $eq: name }}).toArray(function(err, docs){
+        onQueryFinished(docs)
+      });
+    })
   }
 }
 

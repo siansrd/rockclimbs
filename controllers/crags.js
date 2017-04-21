@@ -11,4 +11,10 @@ cragRouter.get('/', function(req, res) {
   });
 })
 
+cragRouter.get('/:name', function(req, res) {
+  cragQuery.byId(req.params.name, function(data){
+    res.json(data)
+  })
+})
+
 module.exports = cragRouter
