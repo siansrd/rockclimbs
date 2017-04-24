@@ -1,6 +1,7 @@
 var express = require('express')
 var cragRouter = express.Router()
-var crags = ['Bennibeg', 'Limekilns']
+var Crag = require('../client/src/models/crag.js')
+
 
 var CragQuery = require('../db/CragQuery')
 var cragQuery = new CragQuery()
@@ -13,6 +14,17 @@ cragRouter.get('/', function(req, res) {
 
 cragRouter.get('/:id', function(req, res) {
   cragQuery.byId(req.params.id, function(data){
+    res.json(data)
+  })
+})
+
+cragRouter.post('/', function(req, res) {
+  var newCrag = new Crag({ 
+    name: req.body.name,
+    latlng: req.body.latlng,
+    climbs: []
+  })
+  cragQuery.add(newCrag, function(data){
     res.json(data)
   })
 })
