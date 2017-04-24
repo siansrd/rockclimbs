@@ -35,6 +35,18 @@ CragQuery.prototype = {
         onQueryFinished(docs)
       })
     })
+  },
+
+  delete: function(id, onQueryFinished) {
+    MongoClient.connect(this.url, function(err, db) {
+      if (db) {
+        var collection = db.collection('crags')
+        collection.remove({ _id: ObjectId(id) })
+      }
+      collection.find().toArray(function(err, docs) {
+        onQueryFinished(docs)
+      })
+    })
   }
 
 
