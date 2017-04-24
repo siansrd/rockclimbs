@@ -30,7 +30,6 @@ cragRouter.post('/', function(req, res) {
 })
 
 cragRouter.delete('/:id', function(req, res) {
-  console.log(req.params.id)
   cragQuery.delete(req.params.id, function(data) {
     res.json(data)
   })

@@ -12,13 +12,12 @@ Crags.prototype = {
     request.onload = oncomplete
     request.send()
   },
-  all: function() {
-    this.makeRequest("http://localhost:3000/api/crags", function() {
+  all: function(url, onComplete) {
+    this.makeRequest(url, function() {
       if(this.status !== 200) return
       var jsonString = this.responseText;
       var results = JSON.parse(jsonString);
-
-      console.log(results);
+      onComplete(results);
     })
   }
 }
