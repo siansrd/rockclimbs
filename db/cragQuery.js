@@ -1,10 +1,12 @@
 var MongoClient = require('mongodb').MongoClient
+var ObjectId = require('mongodb').ObjectId
 
 var CragQuery = function() {
   this.url = 'mongodb://localhost:27017/rockclimbing'
 }
 
 CragQuery.prototype = {
+
   all: function(onQueryFinished) {
     MongoClient.connect(this.url, function(err, db) {
       var collection = db.collection('crags');
@@ -13,14 +15,16 @@ CragQuery.prototype = {
       });
     })
   },
-  byId: function(name, onQueryFinished) {
+
+  byId: function(id, onQueryFinished) {
     MongoClient.connect(this.url, function(err, db) {
       var collection = db.collection('crags');
-      collection.find({name: { $eq: name }}).toArray(function(err, docs){
+      collection.find(ObjectId(id)).toArray(function(err, docs){
         onQueryFinished(docs)
       });
     })
   }
+
 }
 
 module.exports = CragQuery

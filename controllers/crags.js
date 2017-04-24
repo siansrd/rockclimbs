@@ -11,8 +11,8 @@ cragRouter.get('/', function(req, res) {
   });
 })
 
-cragRouter.get('/:name', function(req, res) {
-  cragQuery.byId(req.params.name, function(data){
+cragRouter.get('/:id', function(req, res) {
+  cragQuery.byId(req.params.id, function(data){
     res.json(data)
   })
 })
